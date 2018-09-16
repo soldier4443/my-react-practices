@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Radium from "radium";
 
-const User = ({ id, name, onClickUser }) => (
+const User = Radium(({ id, name, onClickUser }) => (
   <div>
     <button
       style={{
@@ -9,14 +10,18 @@ const User = ({ id, name, onClickUser }) => (
         width: "300px",
         height: "32px",
         marginTop: "2px",
-        border: "0"
+        border: "0",
+        ":hover": {
+          backgroundColor: "#eefaee",
+          cursor: "pointer"
+        }
       }}
       onClick={e => onClickUser(id, name)}
     >
       {name}
     </button>
   </div>
-);
+));
 
 class UserList extends Component {
   constructor() {

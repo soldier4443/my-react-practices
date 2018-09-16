@@ -15,3 +15,7 @@ Basic stuff - ES6+, React DOM, Element, JSX, babel, webpack, etc.
 ## color-organizer
 
 More advanced stuff - State, Component Tree, etc.
+
+## todo-app
+
+My ambitious project!! Shows how to use React and other libraries such as `axios`, `radium`, `recompose`.
