@@ -10,4 +10,8 @@ WIP. I was so impressed about how the author uses JavaScript in "functional way"
 
 ## basics
 
-Basic stuffs - ES6+, React DOM, Element, JSX, babel, webpack, etc.
+Basic stuff - ES6+, React DOM, Element, JSX, babel, webpack, etc.
+
+## color-organizer
+
+More advanced stuff - State, Component Tree, etc.
