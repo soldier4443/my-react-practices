@@ -1,5 +1,6 @@
 .star {
   cursor: pointer;
+  display: inline-block;
   width: 2em;
   height: 2em;
   background-color: grey;
@@ -15,4 +16,17 @@
 
 .star.selected {
   background-color: red;
+}
+
+.color-title {
+  margin: 0.25rem;
+}
+
+.color-tile {
+  height: 120px;
+  width: 120px;
+}
+
+.color {
+  display: inline-block;
 }
