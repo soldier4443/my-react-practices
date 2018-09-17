@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
-import PropTypes from "prop-types";
 import Radium from "radium";
+import DataComponent from "./DataComponent";
 
 const User = Radium(({ id, name, onClickUser }) => (
   <div>
@@ -24,61 +23,14 @@ const User = Radium(({ id, name, onClickUser }) => (
   </div>
 ));
 
-class UserList extends Component {
-  static propTypes = {
-    onClickUser: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [],
-      error: null,
-      loading: false
-    };
-  }
-
-  componentDidMount = () => {
-    this.setState({ loading: false });
-    axios
-      .get("users")
-      .catch(error => {
-        console.log(error);
-        this.setState({
-          error: error,
-          loading: false
-        });
-      })
-      .then(response => {
-        this.setState({
-          users: response.data,
-          loading: false
-        });
-      });
-  };
-
-  onClickUser = (id, name) => {
-    this.props.onClickUser(id, name);
-  };
-
-  render() {
-    const { loading, users, error } = this.state;
-    return (
-      <div>
-        {loading ? (
-          <p>Loading..</p>
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : users ? (
-          users.map((user, index) => (
-            <User key={index} onClickUser={this.onClickUser} {...user} />
-          ))
-        ) : (
-          ""
-        )}
-      </div>
-    );
-  }
-}
+const UserList = DataComponent(({ data, onClickUser }) => {
+  return (
+    <div>
+      {data.map((user, index) => (
+        <User key={index} onClickUser={onClickUser} {...user} />
+      ))}
+    </div>
+  );
+}, "users");
 
 export default UserList;
