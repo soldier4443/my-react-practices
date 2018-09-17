@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Radium from "radium";
 
 const User = Radium(({ id, name, onClickUser }) => (
@@ -24,8 +25,12 @@ const User = Radium(({ id, name, onClickUser }) => (
 ));
 
 class UserList extends Component {
-  constructor() {
-    super();
+  static propTypes = {
+    onClickUser: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
     this.state = {
       users: [],
       error: null,
@@ -53,7 +58,7 @@ class UserList extends Component {
   };
 
   onClickUser = (id, name) => {
-    console.log(`user id: ${id}, name: ${name}`);
+    this.props.onClickUser(id, name);
   };
 
   render() {

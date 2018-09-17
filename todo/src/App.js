@@ -11,7 +11,9 @@ class App extends Component {
       <div className="App">
         <h1>Todo App</h1>
         <h3>Who are you?</h3>
-        <UserList />
+        <UserList onClickUser={(id, name) => {
+          // TODO: show todo list of user.
+        }} />
       </div>
     );
   }
