@@ -2,7 +2,7 @@ import React from "react";
 import { addColor } from "./new/actions";
 import PropTypes from "prop-types";
 
-const AddColorForm = ({ store }) => {
+const AddColorForm = (props, { store }) => {
   let _title, _color;
   const submit = e => {
     // e.preventDefault() -> GET 요청 발생 X
@@ -31,5 +31,9 @@ const AddColorForm = ({ store }) => {
 AddColorForm.propTypes = {
   store: PropTypes.object
 };
+
+AddColorForm.contextTypes = {
+  store: PropTypes.object
+}
 
 export default AddColorForm;

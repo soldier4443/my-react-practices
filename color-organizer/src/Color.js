@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./StarRating";
+import { removeColor, rateColor } from "./new/actions";
 
 class Color extends Component {
   // Before mounting component
@@ -27,7 +28,8 @@ class Color extends Component {
   };
 
   render = () => {
-    const { title, color, rating, onRemove, onRate } = this.props;
+    const { id, title, color, rating, timestamp } = this.props;
+    const { store } = this.context
     return (
       <section className="color" style={this.style}>
         <h1 ref={input => (this._title = input)} className="color-title">
@@ -35,8 +37,8 @@ class Color extends Component {
         </h1>
         <div className="color-tile" style={{ backgroundColor: color }} />
         <div>
-          <StarRating starsSelected={rating} onRate={onRate} />
-          <button onClick={onRemove}>X</button>
+          <StarRating starsSelected={rating} onRate={rating => store.dispatch(rateColor(id, rating))} />
+          <button onClick={() => store.dispatch(removeColor(id))}>X</button>
         </div>
       </section>
     );
@@ -44,19 +46,18 @@ class Color extends Component {
 }
 
 Color.propTypes = {
-  title: PropTypes.string,
-  color: PropTypes.string,
-  rating: PropTypes.number,
-  onRemove: PropTypes.func,
-  onRate: PropTypes.func
-};
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  rating: PropTypes.number
+}
 
 Color.defaultProps = {
-  title: undefined,
-  color: "#000000",
-  rating: 0,
-  onRemove: f => f,
-  onRate: f => f
-};
+  rating: 0
+}
+
+Color.contextTypes = {
+  store: PropTypes.object
+}
 
 export default Color;

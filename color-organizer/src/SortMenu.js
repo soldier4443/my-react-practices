@@ -8,7 +8,7 @@ const options = {
   rating: "SORTED_BY_RATING"
 };
 
-const SortMenu = ({ store }) => (
+const SortMenu = (props, { store }) => (
   <nav className="menu"
     style={{
       display: "flex",
@@ -43,5 +43,9 @@ const SortMenu = ({ store }) => (
 SortMenu.propTypes = {
   store: PropTypes.object
 };
+
+SortMenu.contextTypes = {
+  store: PropTypes.object
+}
 
 export default SortMenu;

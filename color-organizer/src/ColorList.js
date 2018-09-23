@@ -1,9 +1,9 @@
 import React from "react";
 import Color from "./Color";
-import { rateColor, removeColor } from "./new/actions";
+import PropTypes from "prop-types";
 import { sortFunction } from "./helpers/array-helpers";
 
-const ColorList = ({ store }) => {
+const ColorList = (props, { store }) => {
   const { colors, sort } = store.getState();
   const sortedColors = [...colors].sort(sortFunction(sort));
   return (
@@ -15,13 +15,15 @@ const ColorList = ({ store }) => {
           <Color
             key={color.id}
             {...color}
-            onRate={rating => store.dispatch(rateColor(color.id, rating))}
-            onRemove={() => store.dispatch(removeColor(color.id))}
           />
         ))
       )}
     </div>
   );
 };
+
+ColorList.contextTypes = {
+  store: PropTypes.object
+}
 
 export default ColorList;
