@@ -1,33 +1,35 @@
 import React from "react";
+import { addColor } from "./new/actions";
+import PropTypes from "prop-types";
 
-class AddColorForm extends React.Component {
-  constructor(props) {
-    super(props);
-    // 바인딩
-    this.submit = this.submit.bind(this);
-  }
-
-  submit = e => {
-    const { _title, _color } = this.refs;
+const AddColorForm = ({ store }) => {
+  let _title, _color;
+  const submit = e => {
     // e.preventDefault() -> GET 요청 발생 X
     e.preventDefault();
-    console.log(_color.value)
-    this.props.onNewColor(_title.value, _color.value);
+    store.dispatch(addColor(_title.value, _color.value));
     // reset
     _title.value = "";
     _color.value = "#000000";
     _title.focus();
   };
 
-  render = () => {
-    return (
-      <form onSubmit={this.submit}>
-        <input ref="_title" type="text" placeholder="색 이름" required />
-        <input ref="_color" type="color" required />
-        <button>추가</button>
-      </form>
-    );
-  };
-}
+  return (
+    <form onSubmit={submit}>
+      <input
+        ref={input => (_title = input)}
+        type="text"
+        placeholder="색 이름"
+        required
+      />
+      <input ref={input => (_color = input)} type="color" required />
+      <button>추가</button>
+    </form>
+  );
+};
+
+AddColorForm.propTypes = {
+  store: PropTypes.object
+};
 
 export default AddColorForm;
