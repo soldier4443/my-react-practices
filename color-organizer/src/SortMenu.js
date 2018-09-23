@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { sortColors } from "./new/actions";
 
 const options = {
   date: "SORTED_BY_DATE",
@@ -8,14 +6,16 @@ const options = {
   rating: "SORTED_BY_RATING"
 };
 
-const SortMenu = (props, { store }) => (
-  <nav className="menu"
+const SortMenu = ({ sort, onSelect = f => f }) => (
+  <nav
+    className="menu"
     style={{
       display: "flex",
       justifyContent: "space-around",
       backgroundColor: "black"
-    }}>
-    <h1 style={{display: "none"}}>Sort Colors</h1>
+    }}
+  >
+    <h1 style={{ display: "none" }}>Sort Colors</h1>
     {Object.keys(options).map((item, i) => (
       <a
         key={i}
@@ -27,11 +27,12 @@ const SortMenu = (props, { store }) => (
           padding: ".5em",
           textDecoration: "none"
         }}
-        className={store.getState().sort === options[item] ? "selected" : null}
+        className={sort === options[item] ? "selected" : null}
         onClick={e => {
           e.preventDefault();
-          console.log("working!!", options[item])
-          store.dispatch(sortColors(options[item]));
+          console.log("working!!", options[item]);
+          console.log(onSelect);
+          onSelect(options[item]);
         }}
       >
         {item}
@@ -39,13 +40,5 @@ const SortMenu = (props, { store }) => (
     ))}
   </nav>
 );
-
-SortMenu.propTypes = {
-  store: PropTypes.object
-};
-
-SortMenu.contextTypes = {
-  store: PropTypes.object
-}
 
 export default SortMenu;
