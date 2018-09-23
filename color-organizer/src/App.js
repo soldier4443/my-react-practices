@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { NewColor, Menu, Colors, Color } from "./containers";
+import SortMenu from "./component/SortMenu";
+import { NewColor, Colors, Color } from "./containers";
 import "./App.css";
 
 const App = () => (
@@ -10,9 +11,12 @@ const App = () => (
       path="/"
       component={() => (
         <div className="app">
-          <Menu />
+          <Route component={SortMenu} />
           <NewColor />
-          <Colors />
+          <Switch>
+            <Route exact path="/" component={Colors} />
+            <Route path="/sort/:sort" component={Colors} />
+          </Switch>
         </div>
       )}
     />

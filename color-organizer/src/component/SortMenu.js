@@ -1,44 +1,21 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
-const options = {
-  date: "SORTED_BY_DATE",
-  title: "SORTED_BY_TITLE",
-  rating: "SORTED_BY_RATING"
-};
+const selectedStyle = {
+  color: "red"
+}
 
-const SortMenu = ({ sort, onSelect = f => f }) => (
-  <nav
-    className="menu"
-    style={{
-      display: "flex",
-      justifyContent: "space-around",
-      backgroundColor: "black"
-    }}
-  >
-    <h1 style={{ display: "none" }}>Sort Colors</h1>
-    {Object.keys(options).map((item, i) => (
-      <a
-        key={i}
-        href="#"
-        style={{
-          color: "white",
-          fontFamily: "Arial, sans-serif",
-          fontSize: "2em",
-          padding: ".5em",
-          textDecoration: "none"
-        }}
-        className={sort === options[item] ? "selected" : null}
-        onClick={e => {
-          e.preventDefault();
-          console.log("working!!", options[item]);
-          console.log(onSelect);
-          onSelect(options[item]);
-        }}
-      >
-        {item}
-      </a>
-    ))}
+const SortMenu = ({match}) =>
+  <nav className="menu">
+    <NavLink to="/" style={match.isExact && selectedStyle}>
+      날짜
+    </NavLink>
+    <NavLink to="/sort/title" activeStyle={selectedStyle}>
+      이름
+    </NavLink>
+    <NavLink to="/sort/rating" activeStyle={selectedStyle}>
+      평점
+    </NavLink>
   </nav>
-);
 
 export default SortMenu;
