@@ -1,10 +1,11 @@
-import React from "react";
 import { connect } from "react-redux";
-import AddColorForm from "./AddColorForm";
-import ColorList from "./ColorList";
-import SortMenu from "./SortMenu";
+import AddColorForm from "./component/AddColorForm";
+import ColorList from "./component/ColorList";
+import SortMenu from "./component/SortMenu";
+import ColorDetails from "./component/ColorDetails";
 import { addColor, sortColors, rateColor, removeColor } from "./new/actions";
 import { sortFunction } from "./helpers/array-helpers";
+import { findById } from "./helpers/color-helper";
 
 export const NewColor = connect(
   null,
@@ -39,3 +40,7 @@ export const Colors = connect(
     }
   })
 )(ColorList);
+
+export const Color = connect(
+  (state, props) => findById(state.colors, props.match.params.id)
+)(ColorDetails)

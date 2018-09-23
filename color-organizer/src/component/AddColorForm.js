@@ -1,5 +1,5 @@
 import React from "react";
-import { addColor } from "./new/actions";
+import { addColor } from "../new/actions";
 import PropTypes from "prop-types";
 
 const AddColorForm = (props, { store }) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./stylesheets/styles.css";
+import "../stylesheets/styles.css";
 import PropTypes from "prop-types";
 
 const Star = ({ selected = false, onClick = f => f }) => (

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import StarRating from "./StarRating";
 
 class Color extends Component {
@@ -26,13 +27,21 @@ class Color extends Component {
   };
 
   render = () => {
-    const { title, color, rating = 0, onRemove, onRate } = this.props;
+    const { id, title, color, rating = 0, onRemove, onRate, history } = this.props;
     return (
       <section className="color" style={this.style}>
-        <h1 ref={input => (this._title = input)} className="color-title">
+        <h1
+          ref={input => (this._title = input)}
+          className="color-title"
+          onClick={() => history.push(`/${id}`)}
+        >
           {title}
         </h1>
-        <div className="color-tile" style={{ backgroundColor: color }} />
+        <div
+          className="color-tile"
+          style={{ backgroundColor: color }}
+          onClick={() => history.push(`/${id}`)}
+        />
         <div>
           <StarRating starsSelected={rating} onRate={onRate} />
           <button onClick={onRemove}>X</button>
@@ -42,4 +51,4 @@ class Color extends Component {
   };
 }
 
-export default Color;
+export default withRouter(Color);
